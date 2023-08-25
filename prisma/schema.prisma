@@ -6,8 +6,9 @@ generator client {
 }
 
 datasource db {
-  provider = "sqlite"
-  url      = env("DATABASE_URL")
+  provider = "postgresql"
+  url = env("POSTGRES_PRISMA_URL") // uses connection pooling
+  directUrl = env("POSTGRES_URL_NON_POOLING") // uses a direct connection
 }
 
 model Hotel{
@@ -36,17 +37,9 @@ model Reservation{
   startDate DateTime
   endDate DateTime
   clientName String? @unique
-  clientData Client? @relation("clientName", fields: [clientName], references: [name])
   roomId Int? @unique
   room Room? @relation("Reservated", fields: [roomId], references: [roomNumber])
   guests Guest[] @relation("guests")
-}
-
-model Client{
-  id Int @id @default(autoincrement())
-  name String @unique
-  document Int
-  reservation Reservation? @relation("clientName")
 }
 
 model Guest {
