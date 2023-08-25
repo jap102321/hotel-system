@@ -1,0 +1,42 @@
+.container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  width: 100%;
+  justify-content: center;
+}
+.card {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  box-sizing: border-box;
+  border: 1px solid black;
+  height: 300px;
+  width: 300px;
+  margin-block-end: 1.5rem;
+}
+
+.sub__card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 90%;
+}
+
+.sub__card button {
+  background-color: turquoise;
+  border: none;
+  cursor: pointer;
+  padding: 0.5rem;
+}
+
+.card img {
+  margin-block: 8px;
+  border: 1px solid red;
+}
+.admin__actions {
+  display: flex;
+  width: 80%;
+  justify-content: space-between;
+  margin-block-start: 0.5rem;
+}

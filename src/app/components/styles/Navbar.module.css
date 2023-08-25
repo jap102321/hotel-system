@@ -1,0 +1,10 @@
+.nav__list {
+  display: flex;
+  list-style: none;
+  justify-content: space-between;
+  padding-inline-start: 0;
+}
+.nav__list a {
+  text-decoration: none;
+  color: gray;
+}
