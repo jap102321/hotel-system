@@ -26,11 +26,11 @@ export default function BasicFormHotel({ method, params }) {
 
   const submitData = async (e) => {
     e.preventDefault();
-
+    const nameToLC = name.toLowerCase();
     if (method === 'POST') {
       const res = await fetch('http://localhost:3000/api/hotels', {
         method: method,
-        body: JSON.stringify({ name, image, location }),
+        body: JSON.stringify({ nameToLC, image, location }),
         headers: {
           'Content-Type': 'application/json',
         },

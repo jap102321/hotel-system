@@ -8,6 +8,7 @@
 .card {
   display: flex;
   align-items: center;
+  justify-content: center;
   flex-direction: column;
   box-sizing: border-box;
   border: 1px solid black;
@@ -39,4 +40,13 @@
   width: 80%;
   justify-content: space-between;
   margin-block-start: 0.5rem;
+}
+
+.user__actions {
+  display: flex;
+  z-index: 1;
+}
+
+.landingImage {
+  z-index: 0;
 }
