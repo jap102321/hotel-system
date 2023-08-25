@@ -7,11 +7,24 @@ import Link from 'next/link';
 
 export default function RenderRooms({ rooms, params }) {
   const [roomInfo, setRooms] = useState([]);
-
+  const [enabled, setEnabledState] = useState(true);
+  let reservId = 0;
   useEffect(() => {
     setRooms(rooms);
   }, [rooms]);
 
+  const disableHotel = () => {
+    setEnabledState(!enabled);
+  };
+  const reservationId = () => {
+    rooms?.map((res) => {
+      res.reservations.map(
+        ({ reservationNumber }) => (reservId = reservationNumber)
+      );
+    });
+  };
+  reservationId();
+  //To make this more organized its separated in a client component.
   return (
     <>
       {rooms?.map((room) => {
@@ -32,9 +45,22 @@ export default function RenderRooms({ rooms, params }) {
                 Precio con impuestos por noche{' '}
                 {Number(room.price) + Number(room.taxes)}$
               </p>
-              <Link href={`/admin/${params.id}/edit-room`}>
-                <Button>Editar habitación</Button>
-              </Link>
+              <div className={styles.room__buttons}>
+                {enabled && (
+                  <Link href={`/admin/${params.id}/edit-room`}>
+                    <Button>Editar habitación</Button>
+                  </Link>
+                )}
+
+                <Button onClickFun={disableHotel}>
+                  {enabled ? 'Inhabilitar' : 'Habilitar'}
+                </Button>
+                {room.reservations.length > 0 && (
+                  <Link href={`/reservations/${reservId}`}>
+                    <Button>Ver reserva</Button>
+                  </Link>
+                )}
+              </div>
             </div>
           </div>
         );

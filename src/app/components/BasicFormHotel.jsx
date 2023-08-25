@@ -10,6 +10,7 @@ export default function BasicFormHotel({ method, params }) {
   //Controlling values
   const [name, setName] = useState('');
   const [image, setImage] = useState('');
+  const [location, setLocation] = useState('');
 
   useEffect(() => {
     if (method === 'PUT' && params.id !== undefined) {
@@ -18,6 +19,7 @@ export default function BasicFormHotel({ method, params }) {
         .then((data) => {
           setName(data.name);
           setImage(data.image);
+          setLocation(data.location);
         });
     }
   }, [method]);
@@ -28,7 +30,7 @@ export default function BasicFormHotel({ method, params }) {
     if (method === 'POST') {
       const res = await fetch('http://localhost:3000/api/hotels', {
         method: method,
-        body: JSON.stringify({ name, image }),
+        body: JSON.stringify({ name, image, location }),
         headers: {
           'Content-Type': 'application/json',
         },
@@ -38,7 +40,7 @@ export default function BasicFormHotel({ method, params }) {
     } else if (method === 'PUT') {
       const res = await fetch(`http://localhost:3000/api/hotels/${params.id}`, {
         method: method,
-        body: JSON.stringify({ name, image }),
+        body: JSON.stringify({ name, image, location }),
         headers: {
           'Content-Type': 'application/json',
         },
@@ -74,6 +76,15 @@ export default function BasicFormHotel({ method, params }) {
           required
           value={image}
           onChange={(e) => setImage(e.target.value)}
+        />
+        <h5 className={styles.title}>Ubicación del hotel</h5>
+        <input
+          id='location'
+          className={styles.input}
+          placeholder='Bogotá'
+          required
+          value={location}
+          onChange={(e) => setLocation(e.target.value)}
         />
         <button>Enviar</button>
       </form>

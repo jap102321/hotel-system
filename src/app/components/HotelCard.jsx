@@ -6,6 +6,7 @@ import Button from './Button';
 import Link from 'next/link';
 export default function HotelCard() {
   const [shotel, setHotel] = useState([]);
+  const [enabled, setEnabledState] = useState(true);
 
   useEffect(() => {
     {
@@ -15,18 +16,26 @@ export default function HotelCard() {
     }
   }, []);
 
+  const disableHotel = () => {
+    setEnabledState(!enabled);
+  };
   return (
     <div className={styles.container}>
       {shotel.map((hotel) => {
         return (
           <div className={styles.card} key={hotel.id}>
             <Image src='/' height={200} width={200} alt='a' />
-            {hotel.name}
+            <p>{hotel.name}</p>
+            <p>Ubicado en {hotel.location}</p>
             <div className={styles.admin__actions}>
-              <Link href={`/admin/${hotel.id}`}>
-                <Button>Más Información </Button>
-              </Link>
-              <Button>Inhabilitar</Button>
+              {enabled && (
+                <Link href={`/admin/${hotel.id}`}>
+                  <Button>Más Información </Button>
+                </Link>
+              )}
+              <Button onClickFun={disableHotel}>
+                {enabled ? 'Inhabilitar' : 'Habilitar'}
+              </Button>
             </div>
           </div>
         );

@@ -2,7 +2,8 @@
 CREATE TABLE "Hotel" (
     "id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
     "name" TEXT NOT NULL,
-    "image" TEXT NOT NULL
+    "image" TEXT NOT NULL,
+    "location" TEXT NOT NULL
 );
 
 -- CreateTable
@@ -13,7 +14,6 @@ CREATE TABLE "Room" (
     "price" DECIMAL NOT NULL,
     "taxes" DECIMAL NOT NULL,
     "image" TEXT NOT NULL,
-    "isReserved" BOOLEAN NOT NULL DEFAULT false,
     CONSTRAINT "Room_hotelId_fkey" FOREIGN KEY ("hotelId") REFERENCES "Hotel" ("id") ON DELETE RESTRICT ON UPDATE CASCADE
 );
 
@@ -38,6 +38,14 @@ CREATE TABLE "Client" (
 );
 
 -- CreateTable
+CREATE TABLE "Guest" (
+    "id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    "name" TEXT NOT NULL,
+    "roomId" INTEGER,
+    CONSTRAINT "Guest_roomId_fkey" FOREIGN KEY ("roomId") REFERENCES "Reservation" ("roomId") ON DELETE SET NULL ON UPDATE CASCADE
+);
+
+-- CreateTable
 CREATE TABLE "Worker" (
     "id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
     "name" TEXT NOT NULL,
@@ -49,4 +57,10 @@ CREATE TABLE "Worker" (
 CREATE UNIQUE INDEX "Reservation_clientName_key" ON "Reservation"("clientName");
 
 -- CreateIndex
+CREATE UNIQUE INDEX "Reservation_roomId_key" ON "Reservation"("roomId");
+
+-- CreateIndex
 CREATE UNIQUE INDEX "Client_name_key" ON "Client"("name");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "Guest_roomId_key" ON "Guest"("roomId");

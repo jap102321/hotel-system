@@ -14,6 +14,7 @@ model Hotel{
   id Int @id @default(autoincrement())
   name String 
   image String
+  location String
   rooms Room[] @relation("HotelToRoom")
 }
 
@@ -24,7 +25,6 @@ model Room{
   price Decimal
   taxes Decimal
   image String
-  isReserved Boolean @default(false)
   Hotel Hotel? @relation("HotelToRoom", fields:[hotelId], references: [id])
   reservations Reservation[] @relation("Reservated")
 } 
@@ -37,8 +37,9 @@ model Reservation{
   endDate DateTime
   clientName String? @unique
   clientData Client? @relation("clientName", fields: [clientName], references: [name])
-  roomId Int?
+  roomId Int? @unique
   room Room? @relation("Reservated", fields: [roomId], references: [roomNumber])
+  guests Guest[] @relation("guests")
 }
 
 model Client{
@@ -46,6 +47,13 @@ model Client{
   name String @unique
   document Int
   reservation Reservation? @relation("clientName")
+}
+
+model Guest {
+  id Int @id
+  name String
+  roomId Int? @unique
+  reservation Reservation? @relation("guests", fields: [roomId], references: [roomId])
 }
 
 model Worker{

@@ -6,6 +6,9 @@ export async function GET(request, { params }) {
     where: {
       roomNumber: Number(params.id),
     },
+    include: {
+      reservations: true,
+    },
   });
 
   return NextResponse.json(room);

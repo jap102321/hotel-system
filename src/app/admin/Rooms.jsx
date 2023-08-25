@@ -12,6 +12,7 @@ export default function Rooms({ params }) {
   const router = useRouter();
 
   useEffect(() => {
+    //Renders Rooms by ID calling trough params.
     fetch(`http://localhost:3000/api/hotels/${params.id}`)
       .then((res) => res.json())
       .then((data) => {
@@ -43,6 +44,7 @@ export default function Rooms({ params }) {
             <Button>Añadir habitación</Button>
           </Link>
         </div>
+        {/* Renders Rooms */}
         <RenderRooms rooms={rooms} params={params} />
       </div>
     </>

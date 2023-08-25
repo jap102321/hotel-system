@@ -18,3 +18,8 @@
   border-radius: 5px;
   width: fit-content;
 }
+.room__buttons {
+  display: flex;
+  flex-direction: row;
+  gap: 0.5rem;
+}

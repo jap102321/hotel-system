@@ -2,7 +2,11 @@ import { prisma } from '@/libs/prisma';
 import { NextResponse } from 'next/server';
 
 export async function GET() {
-  const rooms = await prisma.room.findMany();
+  const rooms = await prisma.room.findMany({
+    include: {
+      reservations: true,
+    },
+  });
 
   return NextResponse.json(rooms);
 }
@@ -21,7 +25,6 @@ export async function POST(request) {
       price: Number(data.price),
       taxes: Number(data.taxes),
       image: data.image,
-      isReserved: false,
     },
   });
 

@@ -8,11 +8,12 @@ export async function GET(request) {
 }
 
 export async function POST(request) {
-  const { name, image } = await request.json();
+  const { name, image, location } = await request.json();
   const newHotel = await prisma.hotel.create({
     data: {
       name,
       image,
+      location,
     },
   });
   return NextResponse.json(newHotel);

@@ -1,0 +1,18 @@
+.data {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.reservData {
+  padding: 1rem;
+  border: 1px solid white;
+}
+.back__text {
+  cursor: pointer;
+  background-color: black;
+  color: antiquewhite;
+  padding: 0.5rem;
+  border-radius: 5px;
+  width: fit-content;
+}

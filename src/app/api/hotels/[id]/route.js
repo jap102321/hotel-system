@@ -7,7 +7,15 @@ export async function GET(request, { params }) {
       id: Number(params.id),
     },
     include: {
-      rooms: true,
+      rooms: {
+        include: {
+          reservations: {
+            include: {
+              guests: true,
+            },
+          },
+        },
+      },
     },
   });
 
