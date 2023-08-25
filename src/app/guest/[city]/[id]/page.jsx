@@ -1,12 +1,16 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import styles from '@/app/components/styles/HotelInfo.module.css';
 import Link from 'next/link';
 import Button from '@/app/components/Button';
 import Image from 'next/image';
+import { DateOfCIN, DateOfCOUT } from '@/app/components/SearchHotel';
+import DateContext from '@/app/contexts/DateContext';
 
 export default function GetRooms({ params }) {
+  const date = useContext(DateContext);
+
   const [rooms, setRooms] = useState([]);
   useEffect(() => {
     const city = params.city.toLowerCase();
@@ -36,6 +40,9 @@ export default function GetRooms({ params }) {
                 Precio con impuestos por noche{' '}
                 {Number(room.price) + Number(room.taxes)}$
               </p>
+              <Link href={`/guest/reservate/${room.roomNumber}`}>
+                <Button>Reserva</Button>
+              </Link>
             </div>
           </div>
         );

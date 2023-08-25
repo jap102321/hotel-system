@@ -52,8 +52,17 @@ model Client{
 model Guest {
   id Int @id
   name String
+  dateOfBirth DateTime
+  documentType Int
+  email String
+  contactPhone String
   roomId Int? @unique
   reservation Reservation? @relation("guests", fields: [roomId], references: [roomId])
+}
+
+model CofEmergency{
+  name String @id
+  phone String
 }
 
 model Worker{

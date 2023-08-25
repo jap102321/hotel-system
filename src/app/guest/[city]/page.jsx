@@ -9,7 +9,7 @@ export default function GetHotels({ params }) {
 
   useEffect(() => {
     const city = params.city.toLowerCase();
-    fetch(`http://localhost:3000/api/guest/Bogotá`)
+    fetch(`http://localhost:3000/api/guest/${params.city}`)
       .then((res) => res.json())
       .then((data) => setHotels(data));
   }, [params.city]);

@@ -41,8 +41,18 @@ CREATE TABLE "Client" (
 CREATE TABLE "Guest" (
     "id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
     "name" TEXT NOT NULL,
+    "dateOfBirth" DATETIME NOT NULL,
+    "documentType" INTEGER NOT NULL,
+    "email" TEXT NOT NULL,
+    "contactPhone" TEXT NOT NULL,
     "roomId" INTEGER,
     CONSTRAINT "Guest_roomId_fkey" FOREIGN KEY ("roomId") REFERENCES "Reservation" ("roomId") ON DELETE SET NULL ON UPDATE CASCADE
+);
+
+-- CreateTable
+CREATE TABLE "CofEmergency" (
+    "name" TEXT NOT NULL PRIMARY KEY,
+    "phone" TEXT NOT NULL
 );
 
 -- CreateTable
